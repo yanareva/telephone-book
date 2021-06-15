@@ -2,6 +2,7 @@ import { Component } from "react";
 import { v4 as uuid } from "uuid";
 const INITIAL_STATE = {
   name: "",
+  surname: "",
   phone: "",
 };
 class ContactForm extends Component {
@@ -14,18 +15,18 @@ class ContactForm extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const { name, phone } = this.state;
+    const { name,surname, phone } = this.state;
     const { onAdd } = this.props;
     const isValidatedForm = this.validateForm();
 
     if (!isValidatedForm) return;
-    onAdd({ id: uuid(), name, phone });
+    onAdd({ id: uuid(), name,surname, phone });
     this.resetForm();
   };
   validateForm = () => {
-    const { name, phone } = this.state;
+    const { name,surname, phone } = this.state;
     const { onCheckUnique } = this.props;
-    if (!name || !phone) {
+    if (!name || !surname || !phone) {
       alert("Some filed is empty");
       return false;
     }
@@ -33,7 +34,7 @@ class ContactForm extends Component {
   };
   resetForm = () => this.setState(INITIAL_STATE);
   render() {
-    const { name, phone } = this.state;
+    const { name,surname, phone } = this.state;
     return (
       <form onSubmit={this.handleFormSubmit}>
         <input
@@ -41,6 +42,13 @@ class ContactForm extends Component {
           name="name"
           placeholder="Enter name"
           value={name}
+          onChange={this.handleChangeForm}
+        />
+        <input
+          type="text"
+          name="surname"
+          placeholder="Enter surname"
+          value={surname}
           onChange={this.handleChangeForm}
         />
         <input
