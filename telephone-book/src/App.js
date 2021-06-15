@@ -8,9 +8,7 @@ export default class App extends Component {
     contacts: [
       { id: "id-1", name: "Emma Stoun", number: "0998765645" },
       { id: "id-2", name: "Davyd Bekcham", number: "0506877766" },
-      { id: "id-3", name: "Garry Potter", number: "0998765645" },
-      { id: "id-4", name: "Emma Stoun", number: "0998765645" },
-      { id: "id-5", name: "Emma Stoun", number: "0998765645" },
+      { id: "id-3", name: "Garry Potter", number: "0998745604" },
     ],
     filter: "",
   };
@@ -45,13 +43,16 @@ export default class App extends Component {
     const visibleContacts = this.getVisibleContacts();
     return (
       <>
-        <h2>Form Contact</h2>
+        <h1> Phone Book</h1>
+        <h1>Add Contact</h1>
         <ContactForm
           onAdd={this.handleAddContact}
           onCheckUnique={this.nandleCheckUnique}
         />
-        <h3>Contacts List</h3>
+        <h1>Contacts List</h1>
+
         <Filter filter={filter} onChange={this.handleFilterChange} />
+
         <ContactList
           contacts={visibleContacts}
           onRemove={this.handleRemoveContact}

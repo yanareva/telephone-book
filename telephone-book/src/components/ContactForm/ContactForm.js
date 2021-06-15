@@ -15,16 +15,17 @@ class ContactForm extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const { name,surname, phone } = this.state;
+    const { name, surname, phone } = this.state;
     const { onAdd } = this.props;
     const isValidatedForm = this.validateForm();
 
     if (!isValidatedForm) return;
-    onAdd({ id: uuid(), name,surname, phone });
+    onAdd({ id: uuid(), name, surname, phone });
+
     this.resetForm();
   };
   validateForm = () => {
-    const { name,surname, phone } = this.state;
+    const { name, surname, phone } = this.state;
     const { onCheckUnique } = this.props;
     if (!name || !surname || !phone) {
       alert("Some filed is empty");
@@ -33,10 +34,11 @@ class ContactForm extends Component {
     return onCheckUnique(name);
   };
   resetForm = () => this.setState(INITIAL_STATE);
+
   render() {
-    const { name,surname, phone } = this.state;
+    const { name, surname, phone } = this.state;
     return (
-      <form onSubmit={this.handleFormSubmit}>
+      <form onSubmit={this.handleFormSubmit.bind(this)}>
         <input
           type="text"
           name="name"
@@ -58,7 +60,8 @@ class ContactForm extends Component {
           value={phone}
           onChange={this.handleChangeForm}
         />
-        <button type="submit"> Add Contact</button>
+        <button type="submit">Add contact</button>
+        <button onClick={() => this.resetForm()}>Cansel</button>
       </form>
     );
   }
